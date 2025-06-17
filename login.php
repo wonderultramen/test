@@ -13,13 +13,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $row = $result->fetch_assoc();
     if (password_verify($password, $row['password'])) {
       $_SESSION["username"] = $username;
-      header("Location: dashboard.html"); // pastikan file dashboard.php ada
+      header("Location: index.html");
       exit();
     } else {
-      $error = "Password anda salah.";
+      $error = "Password salah.";
     }
   } else {
-    $error = "Akun anda tidak ditemukan.";
+    $error = "Akun tidak ditemukan.";
   }
 }
 ?>
@@ -43,13 +43,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       height: 100vh;
       overflow: hidden;
     }
-
     @keyframes gradientBG {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
-
     .login-container {
       background: rgba(0, 0, 0, 0.6);
       padding: 2rem;
@@ -60,40 +58,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       z-index: 1;
       text-align: center;
     }
-
     .login-container img.logo {
       width: 100px;
       margin-bottom: 1rem;
     }
-
-    .login-container h2 {
-      margin-bottom: 1rem;
-    }
-
-    .login-container input {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 1rem;
-      border: none;
-      border-radius: 10px;
-    }
-
+    .login-container input,
     .login-container button {
       width: 100%;
       padding: 10px;
-      background: #6a11cb;
+      margin-bottom: 1rem;
       border: none;
+      border-radius: 10px;
+    }
+    .login-container button {
+      background: #6a11cb;
       color: white;
       font-weight: bold;
-      border-radius: 10px;
       cursor: pointer;
       transition: 0.3s;
     }
-
     .login-container button:hover {
       background: #2575fc;
     }
-
     canvas {
       position: fixed;
       top: 0;
@@ -101,7 +87,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       z-index: 0;
       pointer-events: none;
     }
-
     .error {
       background: #ff4e4e;
       padding: 10px;
@@ -112,33 +97,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   </style>
 </head>
 <body>
-
 <canvas id="starCanvas"></canvas>
-
 <div class="login-container">
-  <img src="assets/images/logo.png" alt="Logo" class="logo" />
+  <img src="assets/images/logo.png" class="logo" alt="Logo" />
   <h2>Login</h2>
   <?php if (!empty($error)) echo "<div class='error'>$error</div>"; ?>
   <form method="POST">
-    <input type="text" name="username" placeholder="Username" required><br>
-    <input type="password" name="password" placeholder="Password" required><br>
+    <input type="text" name="username" placeholder="Username" required>
+    <input type="password" name="password" placeholder="Password" required>
     <button type="submit">Login</button>
   </form>
   <p>Belum punya akun? <a href="register.php" style="color:#00f2ff;">Register</a></p>
 </div>
-
 <script>
   const canvas = document.getElementById('starCanvas');
   const ctx = canvas.getContext('2d');
   let stars = [];
-
   function resizeCanvas() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
   }
   window.addEventListener('resize', resizeCanvas);
   resizeCanvas();
-
   for (let i = 0; i < 100; i++) {
     stars.push({
       x: Math.random() * canvas.width,
@@ -147,7 +127,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       speed: Math.random() * 0.5 + 0.2
     });
   }
-
   function animateStars() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = 'yellow';
@@ -163,7 +142,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     requestAnimationFrame(animateStars);
   }
-
   animateStars();
 </script>
 </body>
