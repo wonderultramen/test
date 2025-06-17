@@ -8,7 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $sql = "INSERT INTO users (username, password) VALUES ('$username', '$password')";
 
   if ($conn->query($sql) === TRUE) {
-    header("Location: login.php");
+    header("Location: index.php");
     exit();
   } else {
     $error = "Gagal mendaftar: " . $conn->error;
@@ -116,7 +116,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <input type="password" name="password" placeholder="Password" required><br>
     <button type="submit">Daftar</button>
   </form>
-  <p>Sudah punya akun? <a href="login.php" style="color:#00f2ff;">Login</a></p>
+  <p>Sudah punya akun? <a href="index.php" style="color:#00f2ff;">Login</a></p>
 </div>
 
 <script>
